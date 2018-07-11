@@ -35,12 +35,14 @@ private:
     std::vector<char> board;
 
     uint64_t primary_key() const;
-    void updateState();
+    void play(const uint8_t coord);
     void setState(const State state);
 
     EOSLIB_SERIALIZE(game, (player1)(player2)(state)(winner)(turn)(moves)(board))
 
   private:
+    void updateState();
+
     bool isFree(const uint8_t row, const uint8_t col) const;
     bool isCross(const uint8_t row, const uint8_t col) const;
     bool isNought(const uint8_t row, const uint8_t col) const;

@@ -59,19 +59,20 @@ void TicTacToe::play(const account_name player1, const account_name player2, uin
   const auto c = coord(row, col);
   eosio_assert(it->board[c] == ' ', "Position is occupied!");
 
-  games_.modify(it, it->turn, [&](auto &game) {
-    // TODO: Impl. place(coord) that uses coord and turn to set x or o
-    game.board[c] = (game.turn == player1 ? 'x' : 'o');
-    // TODO: impl. flipTurn()
-    game.turn = (game.turn == player1 ? player2 : player1);
-    game.moves++;
-    game.updateState();
-  });
+  games_.modify(it, it->turn, [&](auto &game) { game.play(c); });
 }
 
 uint64_t TicTacToe::game::primary_key() const
 {
   return player1;
+}
+
+void TicTacToe::game::play(const uint8_t c)
+{
+  board[c] = (turn == player1 ? 'x' : 'o');
+  turn = (turn == player1 ? player2 : player1);
+  moves++;
+  updateState();
 }
 
 void TicTacToe::game::updateState()
@@ -82,6 +83,7 @@ void TicTacToe::game::updateState()
     }
     setState(State::Won);
     winner = (sym == 'x' ? player1 : player2);
+    turn = 0;
     return true;
   };
 
@@ -97,6 +99,7 @@ void TicTacToe::game::updateState()
 
   if (moves == 9) {
     setState(State::Draw);
+    turn = 0;
   }
 }
 
