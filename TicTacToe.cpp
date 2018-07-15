@@ -17,6 +17,7 @@ void TicTacToe::newgame(const account_name player1, const account_name player2)
 {
   require_auth(player1);
   require_auth(player2);
+  eosio_assert(player1 != player2, "Players cannot be the same!");
 
   games games_(_self, _self);
   eosio_assert(games_.find(player1) == games_.end(), "Player 1 already has a game!");
