@@ -35,6 +35,8 @@ private:
     std::vector<char> board;
 
     uint64_t primary_key() const;
+    uint64_t by_player2() const;
+
     void play(const uint8_t coord);
     void setState(const State state);
 
@@ -56,7 +58,9 @@ private:
     char diagWinner() const;
   };
 
-  using games = eosio::multi_index<N(game), game>;
+  using games = eosio::multi_index<
+    N(game), game,
+    eosio::indexed_by<N(player2), eosio::const_mem_fun<game, uint64_t, &game::by_player2>>>;
 };
 
 EOSIO_ABI(TicTacToe, (newgame)(endgame)(play))
