@@ -1,7 +1,7 @@
 ## CONTRACT FOR TICTACTOE
 
 ### Intent
-INTENT. The intention of the author and the invokers of this contract is to play the Tic Tac Toe in a two-player fashion.
+INTENT. The intention of the author and the invokers of this contract is to play the Tic Tac Toe in a two-player fashion. The game consists of a 3x3 board on which crosses and noughts (circles) are placed by each player in each round. A winner is found if three of the same type, i.e. three crosses or three noughts, are lined up horizontally, vertically, or diagonally. A draw occurs when no player has a winning configuration as described and there are no more moves left to make.
 
 ### Warranty
 WARRANTY. The invoker of the contract shall uphold its Obligations under this Contract in a timely and workmanlike manner, using knowledge and recommendations for performing the services which meet generally acceptable standards set forth by EOSIO Blockchain Block Producers.
